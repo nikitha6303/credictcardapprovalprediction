@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <!-- Links directly to your shared project styling structure -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .result-container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .result-title {
+            font-size: 28px;
+            color: #1e2022;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        /* Dynamic output container style */
+        .prediction-text {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 35px;
+            display: inline-block;
+        }
+        /* Color themes matching application outcome status */
+        .approved {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .btn-retry {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: background-color 0.15s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-retry:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Consistent Application Top Header -->
+    <div class="navbar">SmartBridge</div>
+
+    <div class="result-container">
+        <h2 class="result-title">Prediction Result</h2>
+        
+        <!-- Jinja2 logic template block that dynamically reads and styles the outcome -->
+        {% if "Approved" in prediction %}
+            <div class="prediction-text approved">{{ prediction }}</div>
+        {% else %}
+            <div class="prediction-text rejected">{{ prediction }}</div>
+        {% endif %}
+
+        <div>
+            <a href="/predict" class="btn-retry">Predict Again</a>
+        </div>
+    </div>
+
+</body>
+</html>
